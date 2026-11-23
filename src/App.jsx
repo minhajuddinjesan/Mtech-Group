@@ -1,3 +1,4 @@
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Work from './components/Work.jsx';
@@ -9,7 +10,9 @@ import StatusBanner from './components/StatusBanner.jsx';
 
 export default function App() {
   return (
-    <>
+    // reducedMotion="user" calms all animations for visitors who ask their device for less motion
+    <MotionConfig reducedMotion="user">
+      <div className="bg-grid" aria-hidden="true" />
       <Cursor />
       <StatusBanner />
       <Navbar />
@@ -20,6 +23,6 @@ export default function App() {
         <Process />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

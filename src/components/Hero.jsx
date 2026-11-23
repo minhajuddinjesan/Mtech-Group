@@ -1,7 +1,14 @@
-import { lazy, Suspense } from 'react';
-import { motion } from 'framer-motion';
+import { Component, lazy, Suspense } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Scene3D = lazy(() => import('./Scene3D.jsx'));
+
+// If WebGL or the 3D scene fails, hide it instead of blanking the whole page
+class SceneBoundary extends Component {
+  state = { failed: false };
+  static getDerivedStateFromError() { return { failed: true }; }
+  render() { return this.state.failed ? null : this.props.children; }
+}
 
 // Letter-by-letter reveal
 function Split({ text, delay = 0 }) {
@@ -23,12 +30,18 @@ function Split({ text, delay = 0 }) {
 }
 
 export default function Hero() {
+  // As the hero scrolls away, the text sinks back into the scene
+  const { scrollY } = useScroll();
+  const textY = useTransform(scrollY, [0, 800], [0, 160]);
+  const textScale = useTransform(scrollY, [0, 800], [1, 0.88]);
+  const textOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+
   return (
     <section id="top" className="hero">
       <div className="hero-canvas">
-        <Suspense fallback={null}><Scene3D /></Suspense>
+        <SceneBoundary><Suspense fallback={null}><Scene3D /></Suspense></SceneBoundary>
       </div>
-      <div className="hero-text">
+      <motion.div className="hero-text" style={{ y: textY, scale: textScale, opacity: textOpacity }}>
         <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
           Digital studio · Belgium
         </motion.p>
@@ -43,7 +56,8 @@ export default function Hero() {
           <a href="#services" className="btn">Explore services</a>
           <a href="#contact" className="btn ghost">Talk to us</a>
         </motion.div>
-      </div>
+      </motion.div>
+      <div className="hero-floor" aria-hidden="true" />
     </section>
   );
 }
