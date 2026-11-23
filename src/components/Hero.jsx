@@ -43,14 +43,14 @@ export default function Hero() {
       </div>
       <motion.div className="hero-text" style={{ y: textY, scale: textScale, opacity: textOpacity }}>
         <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          Digital studio · Belgium
+          Digital studio · Antwerp, Belgium
         </motion.p>
         <h1>
           <Split text="We build the" /><br />
           <span className="grad"><Split text="digital future" delay={0.5} /></span>
         </h1>
         <motion.p className="sub" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3 }}>
-          Websites, apps, video editing and IT security — crafted by M Tech Group for ambitious businesses.
+          Websites, apps, video editing and IT security — crafted by M Tech for ambitious businesses.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5 }}>
           <a href="#services" className="btn">Explore services</a>
