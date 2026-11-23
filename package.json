@@ -1,0 +1,29 @@
+{
+  "name": "mtech-group",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"node server/index.js\"",
+    "client": "vite",
+    "server": "node server/index.js",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@react-three/drei": "9.92.7",
+    "@react-three/fiber": "8.15.12",
+    "cors": "2.8.5",
+    "dotenv": "16.4.5",
+    "express": "4.19.2",
+    "framer-motion": "11.0.8",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "stripe": "14.21.0",
+    "three": "0.160.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.2.1",
+    "concurrently": "8.2.2",
+    "vite": "5.1.6"
+  }
+}
